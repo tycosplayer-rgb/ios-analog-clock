@@ -163,12 +163,12 @@ struct ClockDialView: View {
     }
 
     private var numeralRadius: CGFloat {
-        // 数字落在表盘内侧（刻度环以内），接近老式大钟的章环位置
+        // 数字在表圈（边框+刻度）内侧，章环更靠里
         switch theme {
-        case .classic: return 0.56
-        case .night: return 0.57
-        case .sport: return 0.55
-        case .minimal: return 0.56
+        case .classic: return 0.48
+        case .night: return 0.49
+        case .sport: return 0.47
+        case .minimal: return 0.48
         }
     }
 
