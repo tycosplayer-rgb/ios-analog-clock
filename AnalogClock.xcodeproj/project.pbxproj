@@ -1,0 +1,362 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		89206A5DF99341E6858A2ECD /* AnalogClockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B95CE8FE9FA4B9F83538230 /* AnalogClockApp.swift */; };
+		E3C14FD501DA47EBB947A426 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AE7483F4054D2D97757802 /* ContentView.swift */; };
+		C8897D2DE35D47B7AF458A8F /* FaceTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F020D7317BE40E1873AEB04 /* FaceTheme.swift */; };
+		25B87B8A979E498AAB75DD27 /* SecondHandMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556118E93A684A3CA41A0ABA /* SecondHandMode.swift */; };
+		9E62CDA58FC44B26AA1EF9B3 /* ClockMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C110CE912E45BD9EF37B34 /* ClockMath.swift */; };
+		2E76C8BA06954F5099FB0B2F /* ClockDialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BC419C999E41C6B1E392C5 /* ClockDialView.swift */; };
+		118CFC9C98BA493999F0B87D /* ClockHandsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4297CE925F4F6086C1CC84 /* ClockHandsView.swift */; };
+		7246A5892F3E420DBDE8439C /* AnalogClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE54A6C027945778FFD15F6 /* AnalogClockView.swift */; };
+		CAE7AFEBE8BB4EEFBB6FA7C7 /* SettingsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED3C9C7FCCD470285115579 /* SettingsPanel.swift */; };
+		91562258CB1141D0B511E850 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9AE7844894641D1B4D62971 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		76CCC5758A1D4B5CA18FA930 /* AnalogClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnalogClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B95CE8FE9FA4B9F83538230 /* AnalogClockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogClockApp.swift; sourceTree = "<group>"; };
+		D6AE7483F4054D2D97757802 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7F020D7317BE40E1873AEB04 /* FaceTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTheme.swift; sourceTree = "<group>"; };
+		556118E93A684A3CA41A0ABA /* SecondHandMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondHandMode.swift; sourceTree = "<group>"; };
+		52C110CE912E45BD9EF37B34 /* ClockMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockMath.swift; sourceTree = "<group>"; };
+		44BC419C999E41C6B1E392C5 /* ClockDialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockDialView.swift; sourceTree = "<group>"; };
+		ED4297CE925F4F6086C1CC84 /* ClockHandsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockHandsView.swift; sourceTree = "<group>"; };
+		2AE54A6C027945778FFD15F6 /* AnalogClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogClockView.swift; sourceTree = "<group>"; };
+		BED3C9C7FCCD470285115579 /* SettingsPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPanel.swift; sourceTree = "<group>"; };
+		B9AE7844894641D1B4D62971 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C3A79D90228A4087AA02C020 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3E19109670A0440A949234A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F1A3729815644D338054D97C = {
+			isa = PBXGroup;
+			children = (
+				B716170F309E4F91821227BE /* AnalogClock */,
+				C2CACA1F20C94075BEFA8051 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C2CACA1F20C94075BEFA8051 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				76CCC5758A1D4B5CA18FA930 /* AnalogClock.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B716170F309E4F91821227BE /* AnalogClock */ = {
+			isa = PBXGroup;
+			children = (
+				5B95CE8FE9FA4B9F83538230 /* AnalogClockApp.swift */,
+				D6AE7483F4054D2D97757802 /* ContentView.swift */,
+				7F020D7317BE40E1873AEB04 /* FaceTheme.swift */,
+				556118E93A684A3CA41A0ABA /* SecondHandMode.swift */,
+				52C110CE912E45BD9EF37B34 /* ClockMath.swift */,
+				44BC419C999E41C6B1E392C5 /* ClockDialView.swift */,
+				ED4297CE925F4F6086C1CC84 /* ClockHandsView.swift */,
+				2AE54A6C027945778FFD15F6 /* AnalogClockView.swift */,
+				BED3C9C7FCCD470285115579 /* SettingsPanel.swift */,
+				B9AE7844894641D1B4D62971 /* Assets.xcassets */,
+				C3A79D90228A4087AA02C020 /* Info.plist */,
+			);
+			path = AnalogClock;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7143B90CE5654E48BDDEECEA /* AnalogClock */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B10000000000000000000002 /* Build configuration list for PBXNativeTarget "AnalogClock" */;
+			buildPhases = (
+				5E5BF20CB77C4F39848C368C /* Sources */,
+				3E19109670A0440A949234A2 /* Frameworks */,
+				47EF1F3B24714C9E9C612C68 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AnalogClock;
+			productName = AnalogClock;
+			productReference = 76CCC5758A1D4B5CA18FA930 /* AnalogClock.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D9FFF3CA9FA645EE9C4F930A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					7143B90CE5654E48BDDEECEA = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = B10000000000000000000001 /* Build configuration list for PBXProject "AnalogClock" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = "zh-Hans";
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = F1A3729815644D338054D97C;
+			productRefGroup = C2CACA1F20C94075BEFA8051 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7143B90CE5654E48BDDEECEA /* AnalogClock */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		47EF1F3B24714C9E9C612C68 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				91562258CB1141D0B511E850 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5E5BF20CB77C4F39848C368C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89206A5DF99341E6858A2ECD /* AnalogClockApp.swift in Sources */,
+				E3C14FD501DA47EBB947A426 /* ContentView.swift in Sources */,
+				C8897D2DE35D47B7AF458A8F /* FaceTheme.swift in Sources */,
+				25B87B8A979E498AAB75DD27 /* SecondHandMode.swift in Sources */,
+				9E62CDA58FC44B26AA1EF9B3 /* ClockMath.swift in Sources */,
+				2E76C8BA06954F5099FB0B2F /* ClockDialView.swift in Sources */,
+				118CFC9C98BA493999F0B87D /* ClockHandsView.swift in Sources */,
+				7246A5892F3E420DBDE8439C /* AnalogClockView.swift in Sources */,
+				CAE7AFEBE8BB4EEFBB6FA7C7 /* SettingsPanel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		029BE4C11F16476096887352 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		531E9F19502648EE8E8A3B69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CD24A2E03DEA410B923806A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AnalogClock/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tycosplayer.analogclock;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9617887F09F64C8CB56C1E93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AnalogClock/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tycosplayer.analogclock;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B10000000000000000000001 /* Build configuration list for PBXProject "AnalogClock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				029BE4C11F16476096887352 /* Debug */,
+				531E9F19502648EE8E8A3B69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B10000000000000000000002 /* Build configuration list for PBXNativeTarget "AnalogClock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD24A2E03DEA410B923806A7 /* Debug */,
+				9617887F09F64C8CB56C1E93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D9FFF3CA9FA645EE9C4F930A /* Project object */;
+}
