@@ -20,10 +20,10 @@ struct ContentView: View {
     var body: some View {
         GeometryReader { geo in
             let bannerWidth = max(geo.size.width, 320)
-            // Reserve the standard 50pt banner height when ads are showing;
+            // Reserve the compact 40pt visual slot when ads are showing;
             // reclaim it completely after remove-ads.
             let bannerHeight = adsRemoved ? 0 : BannerAdView.preferredHeight()
-            // Keep controls 8pt clear of the compact banner.
+            // Keep controls 8pt clear of the compact banner slot.
             let controlTopInset: CGFloat = adsRemoved ? 12 : bannerHeight + 8
             let controlBottomInset: CGFloat = adsRemoved ? 12 : bannerHeight + 8
             let reservedChrome: CGFloat = (adsRemoved ? 0 : bannerHeight * 2) + 24
@@ -71,7 +71,7 @@ struct ContentView: View {
                 .animation(.easeInOut(duration: 0.25), value: controlsVisible)
                 .animation(.easeInOut(duration: 0.3), value: adsRemoved)
 
-                // Top + bottom AdMob test banners pinned to edges (pass-through center).
+                // Top + bottom AdMob test banners pinned to compact edge slots (pass-through center).
                 VStack(spacing: 0) {
                     if !adsRemoved {
                         BannerAdView()

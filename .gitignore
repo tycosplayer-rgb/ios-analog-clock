@@ -23,3 +23,5 @@ Package.resolved
 # CocoaPods / Carthage (unused)
 Pods/
 Carthage/Build/
+
+.sync-out/

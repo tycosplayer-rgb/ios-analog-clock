@@ -6,29 +6,45 @@ import UIKit
 struct BannerAdView: UIViewRepresentable {
     var adUnitID: String = AdMobConfig.bannerAdUnitID
 
-    /// Standard AdMob banner: 320x50pt, avoiding the taller large-banner size.
-    static let bannerHeight: CGFloat = AdSizeBanner.size.height
+    /// Compact visual slot. The standard 320x50 ad is centered and clipped to 40pt.
+    static let bannerHeight: CGFloat = 40
 
     func makeCoordinator() -> Coordinator {
         Coordinator()
     }
 
-    func makeUIView(context: Context) -> BannerView {
+    func makeUIView(context: Context) -> UIView {
+        let container = UIView()
+        container.clipsToBounds = true
+
         let banner = BannerView(adSize: AdSizeBanner)
         banner.adUnitID = adUnitID
         banner.rootViewController = Self.keyRootViewController()
         banner.delegate = context.coordinator
+        banner.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(banner)
+
+        NSLayoutConstraint.activate([
+            banner.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            banner.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+            banner.widthAnchor.constraint(equalToConstant: AdSizeBanner.size.width),
+            banner.heightAnchor.constraint(equalToConstant: AdSizeBanner.size.height)
+        ])
+
+        context.coordinator.bannerView = banner
         banner.load(Request())
-        return banner
+        return container
     }
 
-    func updateUIView(_ uiView: BannerView, context: Context) {
-        if uiView.adSize.size != AdSizeBanner.size {
-            uiView.adSize = AdSizeBanner
-            uiView.load(Request())
+    func updateUIView(_ uiView: UIView, context: Context) {
+        guard let banner = context.coordinator.bannerView else { return }
+
+        if banner.adSize.size != AdSizeBanner.size {
+            banner.adSize = AdSizeBanner
+            banner.load(Request())
         }
-        if uiView.rootViewController == nil {
-            uiView.rootViewController = Self.keyRootViewController()
+        if banner.rootViewController == nil {
+            banner.rootViewController = Self.keyRootViewController()
         }
     }
 
@@ -46,6 +62,8 @@ struct BannerAdView: UIViewRepresentable {
     }
 
     final class Coordinator: NSObject, BannerViewDelegate {
+        weak var bannerView: BannerView?
+
         func bannerViewDidReceiveAd(_ bannerView: BannerView) {
             // Test banners should load in Simulator / device when using Google test IDs.
         }
