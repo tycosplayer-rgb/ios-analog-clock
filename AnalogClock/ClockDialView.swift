@@ -148,7 +148,9 @@ struct ClockDialView: View {
             ForEach(labels, id: \.0) { hour, text in
                 let angle = Double(hour) * 30.0 - 90.0
                 let rad = angle * .pi / 180.0
-                let r = size * numeralRadius
+                // size 是直径；刻度用 size/2 为半径，数字必须同一坐标系
+                let dialRadius = size / 2
+                let r = dialRadius * numeralRadius
                 Text(text)
                     .font(numeralFont)
                     .foregroundStyle(theme.numeral)
@@ -163,25 +165,25 @@ struct ClockDialView: View {
     }
 
     private var numeralRadius: CGFloat {
-        // 紧贴大刻度内侧：刻度内端约 0.82–0.85，数字中心再往里留半个字高空隙
+        // 相对表盘半径：大刻度内端约 0.84，数字中心略往里，刚好不重叠
         switch theme {
-        case .classic: return 0.76
-        case .night: return 0.77
-        case .sport: return 0.74
-        case .minimal: return 0.76
+        case .classic: return 0.72
+        case .night: return 0.73
+        case .sport: return 0.70
+        case .minimal: return 0.72
         }
     }
 
     private var numeralFont: Font {
         switch theme {
         case .classic:
-            return .system(size: size * 0.075, weight: .medium, design: .serif)
+            return .system(size: size * 0.065, weight: .medium, design: .serif)
         case .night:
-            return .system(size: size * 0.07, weight: .light, design: .rounded)
+            return .system(size: size * 0.06, weight: .light, design: .rounded)
         case .sport:
-            return .system(size: size * 0.09, weight: .bold, design: .rounded)
+            return .system(size: size * 0.075, weight: .bold, design: .rounded)
         case .minimal:
-            return .system(size: size * 0.06)
+            return .system(size: size * 0.055)
         }
     }
 }
