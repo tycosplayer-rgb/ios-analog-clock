@@ -43,7 +43,7 @@ final class RemoveAdsStore: ObservableObject {
 
     func purchase() async {
         guard let product else {
-            errorMessage = "商品尚未加载，请稍后重试。"
+            errorMessage = String(localized: "商品尚未加载，请稍后重试。")
             await loadProduct()
             return
         }
@@ -74,7 +74,7 @@ final class RemoveAdsStore: ObservableObject {
             try await AppStore.sync()
             await refreshEntitlements()
             if !adsRemoved {
-                errorMessage = "未找到可恢复的购买。"
+                errorMessage = String(localized: "未找到可恢复的购买。")
             } else {
                 errorMessage = nil
             }

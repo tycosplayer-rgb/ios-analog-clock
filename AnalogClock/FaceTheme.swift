@@ -11,19 +11,19 @@ enum FaceTheme: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .classic: return "经典"
-        case .night: return "夜黑"
-        case .minimal: return "极简"
-        case .sport: return "运动"
+        case .classic: return String(localized: "经典")
+        case .night: return String(localized: "夜黑")
+        case .minimal: return String(localized: "极简")
+        case .sport: return String(localized: "运动")
         }
     }
 
     var subtitle: String {
         switch self {
-        case .classic: return "浅色罗马风格"
-        case .night: return "深色夜光"
-        case .minimal: return "极简无数字"
-        case .sport: return "高对比运动风"
+        case .classic: return String(localized: "浅色罗马风格")
+        case .night: return String(localized: "深色夜光")
+        case .minimal: return String(localized: "极简无数字")
+        case .sport: return String(localized: "高对比运动风")
         }
     }
 

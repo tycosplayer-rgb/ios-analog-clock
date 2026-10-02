@@ -13,17 +13,17 @@ enum SecondHandMode: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .smooth: return "平滑"
-        case .tick1: return "秒跳1"
-        case .tick4: return "秒跳2"
+        case .smooth: return String(localized: "平滑")
+        case .tick1: return String(localized: "秒跳1")
+        case .tick4: return String(localized: "秒跳2")
         }
     }
 
     var subtitle: String {
         switch self {
-        case .smooth: return "连续扫秒"
-        case .tick1: return "每秒一跳 · 秒摆"
-        case .tick4: return "每秒四跳"
+        case .smooth: return String(localized: "连续扫秒")
+        case .tick1: return String(localized: "每秒一跳 · 秒摆")
+        case .tick4: return String(localized: "每秒四跳")
         }
     }
 }

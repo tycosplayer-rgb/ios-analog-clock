@@ -138,11 +138,11 @@ struct SettingsPanel: View {
                     Text("一次性买断，去掉顶部与底部横幅广告。本地可用 Products.storekit 测试；上架前请在 App Store Connect 创建同名商品 \(RemoveAdsStore.productID)。")
                 }
             }
-            .navigationTitle("设置")
+            .navigationTitle(String(localized: "设置"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("完成") { dismiss() }
+                    Button(String(localized: "完成")) { dismiss() }
                 }
             }
             .task {
@@ -155,9 +155,9 @@ struct SettingsPanel: View {
 
     private var priceSubtitle: String {
         if let product = removeAdsStore.product {
-            return "永久移除横幅 · \(product.displayPrice)"
+            return String(localized: "永久移除横幅 · \(product.displayPrice)")
         }
-        return "永久移除顶部和底部广告"
+        return String(localized: "永久移除顶部和底部广告")
     }
 }
 

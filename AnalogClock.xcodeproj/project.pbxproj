@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		21A464E3C49A51F43E175230 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD9693ACC37D4E5C4A1B078 /* ContentView.swift */; };
+		47EE9F9F3E51BC04AE8F51B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37F5CFA2FD46462611BC5BDA /* InfoPlist.strings */; };
 		4E481E4799C8CB4BCA9AC494 /* AnalogClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B989C74093E82346307957DE /* AnalogClockView.swift */; };
+		5739344C8263E69957527697 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 28CB9A8C6B7F47464378EE3D /* Localizable.xcstrings */; };
 		606D389EBB7C8826BCB142F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4C40B87E6E065F7C8A1B1D5 /* Assets.xcassets */; };
 		60AE572643BB04DA8A1C48D0 /* SettingsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C4D0819051A41DE4856A7 /* SettingsPanel.swift */; };
 		66F15025AD2DF42A970765C4 /* AdMobConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2942D10D5E1191CDF82F0D0 /* AdMobConfig.swift */; };
@@ -28,8 +30,10 @@
 		0E39A3D9B41DBE033B53E491 /* AnalogClockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogClockApp.swift; sourceTree = "<group>"; };
 		17B60BB35726BF13345079C9 /* BannerAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdView.swift; sourceTree = "<group>"; };
 		1FD9693ACC37D4E5C4A1B078 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		28CB9A8C6B7F47464378EE3D /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		3D954A1C0C7C8772503D4564 /* ClockMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockMath.swift; sourceTree = "<group>"; };
 		3ED9F3D4B0D63213BAA8B310 /* RemoveAdsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAdsStore.swift; sourceTree = "<group>"; };
+		6421E3EB208747FAC3DCD3CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		93B7C63594998EE79C38F975 /* ClockHandsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockHandsView.swift; sourceTree = "<group>"; };
 		962FDD1D0A11900D01F1BDA1 /* ClockDialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockDialView.swift; sourceTree = "<group>"; };
 		A2942D10D5E1191CDF82F0D0 /* AdMobConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobConfig.swift; sourceTree = "<group>"; };
@@ -39,6 +43,7 @@
 		CD3C4D0819051A41DE4856A7 /* SettingsPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPanel.swift; sourceTree = "<group>"; };
 		D369563CF2BC9184F2824516 /* AnalogClock.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = AnalogClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5F8D672AC37F7E9CFB5E005 /* FaceTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTheme.swift; sourceTree = "<group>"; };
+		D86E0B1C9871D4FBA404EFED /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		F1DAF573DD7FEC7CD1FD114A /* SecondHandMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondHandMode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,6 +73,8 @@
 				3D954A1C0C7C8772503D4564 /* ClockMath.swift */,
 				1FD9693ACC37D4E5C4A1B078 /* ContentView.swift */,
 				D5F8D672AC37F7E9CFB5E005 /* FaceTheme.swift */,
+				37F5CFA2FD46462611BC5BDA /* InfoPlist.strings */,
+				28CB9A8C6B7F47464378EE3D /* Localizable.xcstrings */,
 				3ED9F3D4B0D63213BAA8B310 /* RemoveAdsStore.swift */,
 				F1DAF573DD7FEC7CD1FD114A /* SecondHandMode.swift */,
 				CD3C4D0819051A41DE4856A7 /* SettingsPanel.swift */,
@@ -144,6 +151,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
+				en,
 				"zh-Hans",
 			);
 			mainGroup = 83D8CFE00D76214981B0D440;
@@ -166,6 +174,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				606D389EBB7C8826BCB142F5 /* Assets.xcassets in Resources */,
+				47EE9F9F3E51BC04AE8F51B7 /* InfoPlist.strings in Resources */,
+				5739344C8263E69957527697 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +202,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		37F5CFA2FD46462611BC5BDA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6421E3EB208747FAC3DCD3CD /* en */,
+				D86E0B1C9871D4FBA404EFED /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		11121E9029A8A561875AC892 /* Release */ = {
