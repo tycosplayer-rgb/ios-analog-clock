@@ -135,46 +135,6 @@ struct ContentView: View {
                 }
                 .buttonStyle(.plain)
             }
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 10)
-        .background(
-            .ultraThinMaterial,
-            in: RoundedRectangle(cornerRadius: 20, style: .continuous)
-        )
-        .padding(.horizontal, 16)
-        .onTapGesture { }
-    }
-
-    private var bottomBar: some View {
-        HStack(spacing: 12) {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ForEach(FaceTheme.allCases) { face in
-                        Button {
-                            themeRaw = face.rawValue
-                        } label: {
-                            Text(face.title)
-                                .font(.subheadline.weight(theme == face ? .semibold : .regular))
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 8)
-                                .background(
-                                    Capsule()
-                                        .fill(theme == face
-                                              ? theme.secondHand.opacity(0.25)
-                                              : Color.primary.opacity(0.08))
-                                )
-                                .overlay(
-                                    Capsule()
-                                        .stroke(theme == face ? theme.secondHand.opacity(0.6) : .clear, lineWidth: 1)
-                                )
-                                .foregroundStyle(theme.majorTick)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-                .padding(.horizontal, 4)
-            }
 
             Button {
                 showSettings = true
@@ -187,6 +147,44 @@ struct ContentView: View {
             }
             .buttonStyle(.plain)
             .accessibilityLabel(String(localized: "设置"))
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 10)
+        .background(
+            .ultraThinMaterial,
+            in: RoundedRectangle(cornerRadius: 20, style: .continuous)
+        )
+        .padding(.horizontal, 16)
+        .onTapGesture { }
+    }
+
+    private var bottomBar: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(FaceTheme.allCases) { face in
+                    Button {
+                        themeRaw = face.rawValue
+                    } label: {
+                        Text(face.title)
+                            .font(.subheadline.weight(theme == face ? .semibold : .regular))
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(
+                                Capsule()
+                                    .fill(theme == face
+                                          ? theme.secondHand.opacity(0.25)
+                                          : Color.primary.opacity(0.08))
+                            )
+                            .overlay(
+                                Capsule()
+                                    .stroke(theme == face ? theme.secondHand.opacity(0.6) : .clear, lineWidth: 1)
+                            )
+                            .foregroundStyle(theme.majorTick)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.horizontal, 4)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
