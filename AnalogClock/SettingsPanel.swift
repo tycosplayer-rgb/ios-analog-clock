@@ -55,7 +55,7 @@ struct SettingsPanel: View {
                         .buttonStyle(.plain)
                     }
                 } header: {
-                    Text("表盘样式")
+                    Text(String(localized: "表盘样式"))
                 }
 
                 Section {
@@ -84,14 +84,14 @@ struct SettingsPanel: View {
                         .buttonStyle(.plain)
                     }
                 } header: {
-                    Text("秒针模式")
+                    Text(String(localized: "秒针模式"))
                 } footer: {
-                    Text("「秒跳1」每秒一跳，跳完后像老钟一样短暂颤一下就停；「秒跳2」每秒跳 4 格。")
+                    Text(String(localized: "「秒跳1」每秒一跳，跳完后像老钟一样短暂颤一下就停；「秒跳2」每秒跳 4 格。"))
                 }
 
                 Section {
                     if removeAdsStore.adsRemoved {
-                        Label("已永久去除广告", systemImage: "checkmark.seal.fill")
+                        Label(String(localized: "已永久去除广告"), systemImage: "checkmark.seal.fill")
                             .foregroundStyle(.green)
                     } else {
                         Button {
@@ -99,7 +99,7 @@ struct SettingsPanel: View {
                         } label: {
                             HStack {
                                 VStack(alignment: .leading, spacing: 2) {
-                                    Text("去广告（永久）")
+                                    Text(String(localized: "去广告（永久）"))
                                         .font(.headline)
                                     Text(priceSubtitle)
                                         .font(.caption)
@@ -119,7 +119,7 @@ struct SettingsPanel: View {
                             Task { await removeAdsStore.restore() }
                         } label: {
                             HStack {
-                                Text("恢复购买")
+                                Text(String(localized: "恢复购买"))
                                 Spacer()
                                 Image(systemName: "arrow.clockwise")
                             }
@@ -133,9 +133,9 @@ struct SettingsPanel: View {
                             .foregroundStyle(.red)
                     }
                 } header: {
-                    Text("广告")
+                    Text(String(localized: "广告"))
                 } footer: {
-                    Text("一次性买断，去掉顶部与底部横幅广告。本地可用 Products.storekit 测试；上架前请在 App Store Connect 创建同名商品 \(RemoveAdsStore.productID)。")
+                    Text(String(localized: "一次性买断，去掉顶部与底部横幅广告。本地可用 Products.storekit 测试；上架前请在 App Store Connect 创建同名商品 \(RemoveAdsStore.productID)。"))
                 }
             }
             .navigationTitle(String(localized: "设置"))
