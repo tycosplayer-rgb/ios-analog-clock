@@ -58,7 +58,8 @@ https://github.com/googleads/swift-package-manager-google-mobile-ads
 
 - **Product ID**：`com.tycosplayer.analogclock.removeads`（非消耗型）
 - 购买状态持久化到 `UserDefaults` / `@AppStorage` 键 `adsRemoved`
-- 设置页提供「去广告」购买与「恢复购买」；主界面底部也有「去广告」芯片入口
+- 设置页提供「去广告」购买与「恢复购买」（仅设置内入口；主界面无「去广告」芯片）
+- 横幅可见时，顶部秒针模式条与底部表盘/设置条按横幅高度 inset，避免被广告遮挡；`adsRemoved` 后恢复原位
 - 本地测试：根目录 `Products.storekit` 已挂到 Scheme → Run → StoreKit Configuration。在 Simulator / 本地 Xcode 运行即可弹出测试购买，**无需** App Store Connect。
 - **生产环境**：请在 App Store Connect 创建同名非消耗型商品，并关闭或换掉本地 StoreKit Configuration；真机沙盒可用 Sandbox 账号测试。
 

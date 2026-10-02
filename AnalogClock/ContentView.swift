@@ -20,65 +20,81 @@ struct ContentView: View {
     var body: some View {
         GeometryReader { geo in
             let bannerWidth = max(geo.size.width, 320)
+            // Reserved banner height when ads are showing; 0 after remove-ads.
             let bannerHeight = adsRemoved ? 0 : BannerAdView.preferredHeight(forWidth: bannerWidth)
+            // Controls sit clear of banners: inset by banner height when visible,
+            // otherwise restore the original 12pt edge padding.
+            let controlTopInset: CGFloat = adsRemoved ? 12 : bannerHeight + 8
+            let controlBottomInset: CGFloat = adsRemoved ? 12 : bannerHeight + 8
             let reservedChrome: CGFloat = (adsRemoved ? 0 : bannerHeight * 2) + 24
             let usable = max(geo.size.height - reservedChrome, 120)
             let side = min(geo.size.width, usable)
             // When ads are gone, reclaim vertical space for a larger dial.
             let dialSize = side * (adsRemoved ? 0.94 : 0.88)
 
-            VStack(spacing: 0) {
-                if !adsRemoved {
-                    BannerAdView(width: bannerWidth)
-                        .frame(width: bannerWidth, height: bannerHeight)
-                        .frame(maxWidth: .infinity)
-                        .background(Color.black.opacity(0.06))
+            ZStack {
+                theme.background
+
+                VStack(spacing: 0) {
+                    Spacer(minLength: 0)
+
+                    AnalogClockView(
+                        theme: theme,
+                        secondMode: secondMode,
+                        size: dialSize
+                    )
+                    .frame(maxWidth: .infinity)
+
+                    Spacer(minLength: 0)
                 }
+                .padding(.horizontal, 8)
+                // Keep the dial band between the banner strips.
+                .padding(.top, bannerHeight)
+                .padding(.bottom, bannerHeight)
 
-                ZStack {
-                    theme.background
-
-                    VStack(spacing: 0) {
-                        Spacer(minLength: 0)
-
-                        AnalogClockView(
-                            theme: theme,
-                            secondMode: secondMode,
-                            size: dialSize
-                        )
-                        .frame(maxWidth: .infinity)
-
-                        Spacer(minLength: 0)
+                // Mode / face controls — inset so they never sit under banners.
+                VStack(spacing: 12) {
+                    if controlsVisible {
+                        topSecondModeBar
+                            .transition(.move(edge: .top).combined(with: .opacity))
                     }
-                    .padding(.horizontal, 8)
 
-                    VStack(spacing: 12) {
-                        if controlsVisible {
-                            topSecondModeBar
-                                .transition(.move(edge: .top).combined(with: .opacity))
-                        }
+                    Spacer()
 
-                        Spacer()
-
-                        if controlsVisible {
-                            bottomBar
-                                .transition(.move(edge: .bottom).combined(with: .opacity))
-                        }
+                    if controlsVisible {
+                        bottomBar
+                            .transition(.move(edge: .bottom).combined(with: .opacity))
                     }
-                    .animation(.easeInOut(duration: 0.25), value: controlsVisible)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    withAnimation { controlsVisible.toggle() }
-                }
+                .padding(.top, controlTopInset)
+                .padding(.bottom, controlBottomInset)
+                .animation(.easeInOut(duration: 0.25), value: controlsVisible)
+                .animation(.easeInOut(duration: 0.3), value: adsRemoved)
 
-                if !adsRemoved {
-                    BannerAdView(width: bannerWidth)
-                        .frame(width: bannerWidth, height: bannerHeight)
-                        .frame(maxWidth: .infinity)
-                        .background(Color.black.opacity(0.06))
+                // Top + bottom AdMob test banners pinned to edges (pass-through center).
+                VStack(spacing: 0) {
+                    if !adsRemoved {
+                        BannerAdView(width: bannerWidth)
+                            .frame(width: bannerWidth, height: bannerHeight)
+                            .frame(maxWidth: .infinity)
+                            .background(Color.black.opacity(0.06))
+                    }
+
+                    Spacer(minLength: 0)
+                        .allowsHitTesting(false)
+
+                    if !adsRemoved {
+                        BannerAdView(width: bannerWidth)
+                            .frame(width: bannerWidth, height: bannerHeight)
+                            .frame(maxWidth: .infinity)
+                            .background(Color.black.opacity(0.06))
+                    }
                 }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                withAnimation { controlsVisible.toggle() }
             }
             .background(theme.background.ignoresSafeArea())
         }
@@ -127,7 +143,6 @@ struct ContentView: View {
             in: RoundedRectangle(cornerRadius: 20, style: .continuous)
         )
         .padding(.horizontal, 16)
-        .padding(.top, 12)
         .onTapGesture { }
     }
 
@@ -157,28 +172,6 @@ struct ContentView: View {
                         }
                         .buttonStyle(.plain)
                     }
-
-                    if !adsRemoved {
-                        Button {
-                            showSettings = true
-                        } label: {
-                            Text("去广告")
-                                .font(.subheadline.weight(.semibold))
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 8)
-                                .background(
-                                    Capsule()
-                                        .fill(theme.secondHand.opacity(0.22))
-                                )
-                                .overlay(
-                                    Capsule()
-                                        .stroke(theme.secondHand.opacity(0.55), lineWidth: 1)
-                                )
-                                .foregroundStyle(theme.majorTick)
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel("去广告")
-                    }
                 }
                 .padding(.horizontal, 4)
             }
@@ -202,7 +195,6 @@ struct ContentView: View {
             in: RoundedRectangle(cornerRadius: 20, style: .continuous)
         )
         .padding(.horizontal, 16)
-        .padding(.bottom, 12)
         .onTapGesture { }
     }
 }
