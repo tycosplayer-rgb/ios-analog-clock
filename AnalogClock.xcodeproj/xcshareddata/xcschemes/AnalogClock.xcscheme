@@ -4,7 +4,8 @@
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      runPostActionsOnFailure = "NO">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -14,7 +15,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7143B90CE5654E48BDDEECEA"
+               BlueprintIdentifier = "826FF511BD5C7BEB63AA5B39"
                BuildableName = "AnalogClock.app"
                BlueprintName = "AnalogClock"
                ReferencedContainer = "container:AnalogClock.xcodeproj">
@@ -27,7 +28,18 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      shouldAutocreateTestPlan = "YES">
+      onlyGenerateCoverageForSpecifiedTargets = "NO">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "826FF511BD5C7BEB63AA5B39"
+            BuildableName = "AnalogClock.app"
+            BlueprintName = "AnalogClock"
+            ReferencedContainer = "container:AnalogClock.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <Testables>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -43,12 +55,17 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7143B90CE5654E48BDDEECEA"
+            BlueprintIdentifier = "826FF511BD5C7BEB63AA5B39"
             BuildableName = "AnalogClock.app"
             BlueprintName = "AnalogClock"
             ReferencedContainer = "container:AnalogClock.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+      </CommandLineArguments>
+      <StoreKitConfigurationFileReference
+         identifier = "../../Products.storekit">
+      </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -60,7 +77,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7143B90CE5654E48BDDEECEA"
+            BlueprintIdentifier = "826FF511BD5C7BEB63AA5B39"
             BuildableName = "AnalogClock.app"
             BlueprintName = "AnalogClock"
             ReferencedContainer = "container:AnalogClock.xcodeproj">

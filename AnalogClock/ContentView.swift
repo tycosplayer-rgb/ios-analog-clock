@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @AppStorage("faceTheme") private var themeRaw: String = FaceTheme.classic.rawValue
     @AppStorage("secondHandMode") private var secondModeRaw: String = SecondHandMode.smooth.rawValue
+    @EnvironmentObject private var removeAdsStore: RemoveAdsStore
     @State private var showSettings = false
     @State private var controlsVisible = true
 
@@ -14,58 +15,83 @@ struct ContentView: View {
         SecondHandMode(rawValue: secondModeRaw) ?? .smooth
     }
 
+    private var adsRemoved: Bool { removeAdsStore.adsRemoved }
+
     var body: some View {
         GeometryReader { geo in
-            let side = min(geo.size.width, geo.size.height)
-            // 几乎占满安全区，略留边给控件与呼吸感
-            let dialSize = side * 0.92
+            let bannerWidth = max(geo.size.width, 320)
+            let bannerHeight = adsRemoved ? 0 : BannerAdView.preferredHeight(forWidth: bannerWidth)
+            let reservedChrome: CGFloat = (adsRemoved ? 0 : bannerHeight * 2) + 24
+            let usable = max(geo.size.height - reservedChrome, 120)
+            let side = min(geo.size.width, usable)
+            // When ads are gone, reclaim vertical space for a larger dial.
+            let dialSize = side * (adsRemoved ? 0.94 : 0.88)
 
-            ZStack {
-                theme.background
-                    .ignoresSafeArea()
-
-                VStack(spacing: 0) {
-                    Spacer(minLength: 0)
-
-                    AnalogClockView(
-                        theme: theme,
-                        secondMode: secondMode,
-                        size: dialSize
-                    )
-                    .frame(maxWidth: .infinity)
-
-                    Spacer(minLength: 0)
+            VStack(spacing: 0) {
+                if !adsRemoved {
+                    BannerAdView(width: bannerWidth)
+                        .frame(width: bannerWidth, height: bannerHeight)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.black.opacity(0.06))
                 }
-                .padding(.horizontal, 8)
 
-                VStack(spacing: 12) {
-                    if controlsVisible {
-                        topSecondModeBar
-                            .transition(.move(edge: .top).combined(with: .opacity))
+                ZStack {
+                    theme.background
+
+                    VStack(spacing: 0) {
+                        Spacer(minLength: 0)
+
+                        AnalogClockView(
+                            theme: theme,
+                            secondMode: secondMode,
+                            size: dialSize
+                        )
+                        .frame(maxWidth: .infinity)
+
+                        Spacer(minLength: 0)
                     }
+                    .padding(.horizontal, 8)
 
-                    Spacer()
+                    VStack(spacing: 12) {
+                        if controlsVisible {
+                            topSecondModeBar
+                                .transition(.move(edge: .top).combined(with: .opacity))
+                        }
 
-                    if controlsVisible {
-                        bottomBar
-                            .transition(.move(edge: .bottom).combined(with: .opacity))
+                        Spacer()
+
+                        if controlsVisible {
+                            bottomBar
+                                .transition(.move(edge: .bottom).combined(with: .opacity))
+                        }
                     }
+                    .animation(.easeInOut(duration: 0.25), value: controlsVisible)
                 }
-                .animation(.easeInOut(duration: 0.25), value: controlsVisible)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    withAnimation { controlsVisible.toggle() }
+                }
+
+                if !adsRemoved {
+                    BannerAdView(width: bannerWidth)
+                        .frame(width: bannerWidth, height: bannerHeight)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.black.opacity(0.06))
+                }
             }
-            .contentShape(Rectangle())
-            .onTapGesture {
-                withAnimation { controlsVisible.toggle() }
-            }
+            .background(theme.background.ignoresSafeArea())
         }
         .statusBarHidden(true)
         .persistentSystemOverlays(.hidden)
         .sheet(isPresented: $showSettings) {
             SettingsPanel(themeRaw: $themeRaw, secondModeRaw: $secondModeRaw)
+                .environmentObject(removeAdsStore)
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
         }
         .preferredColorScheme(theme == .night || theme == .sport ? .dark : .light)
+        .animation(.easeInOut(duration: 0.3), value: adsRemoved)
     }
 
     /// 顶部：秒针模式切换
@@ -107,7 +133,6 @@ struct ContentView: View {
 
     private var bottomBar: some View {
         HStack(spacing: 12) {
-            // 快速切换表盘（横向芯片）
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     ForEach(FaceTheme.allCases) { face in
@@ -131,6 +156,28 @@ struct ContentView: View {
                                 .foregroundStyle(theme.majorTick)
                         }
                         .buttonStyle(.plain)
+                    }
+
+                    if !adsRemoved {
+                        Button {
+                            showSettings = true
+                        } label: {
+                            Text("去广告")
+                                .font(.subheadline.weight(.semibold))
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 8)
+                                .background(
+                                    Capsule()
+                                        .fill(theme.secondHand.opacity(0.22))
+                                )
+                                .overlay(
+                                    Capsule()
+                                        .stroke(theme.secondHand.opacity(0.55), lineWidth: 1)
+                                )
+                                .foregroundStyle(theme.majorTick)
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("去广告")
                     }
                 }
                 .padding(.horizontal, 4)
@@ -156,11 +203,11 @@ struct ContentView: View {
         )
         .padding(.horizontal, 16)
         .padding(.bottom, 12)
-        // 阻止点击穿透到背后的显隐手势
         .onTapGesture { }
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(RemoveAdsStore())
 }
