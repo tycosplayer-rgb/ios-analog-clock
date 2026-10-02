@@ -92,23 +92,32 @@ private struct Tick1HandsLayer: View {
             destination += 360
         }
 
-        // 秒摆：更大摆幅 + 多次来回（欠阻尼），跳到目标后明显晃几下再停。
-        // 先冲过目标 ~3.2°，再用低阻尼弹簧回落到目标，约晃 3–4 次。
-        let overshoot = destination + 3.2
-        withAnimation(.easeOut(duration: 0.035)) {
-            displayedSecondDegrees = overshoot
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.036) {
-            withAnimation(.spring(response: 0.22, dampingFraction: 0.38)) {
-                displayedSecondDegrees = destination
+        // 秒摆：故意放慢、加大，方便肉眼看清（约 6–8° 过冲，来回 4–5 次，约 1.2s 内停住）。
+        // 用显式关键帧而不是很快的弹簧，避免“一闪而过”。
+        let peaks: [(delay: Double, offset: Double, duration: Double)] = [
+            (0.00,  6.5, 0.10),
+            (0.10, -4.0, 0.12),
+            (0.22,  2.6, 0.12),
+            (0.34, -1.5, 0.12),
+            (0.46,  0.7, 0.12),
+            (0.58,  0.0, 0.14),
+        ]
+        for step in peaks {
+            let angle = destination + step.offset
+            let delay = step.delay
+            let dur = step.duration
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                withAnimation(.easeInOut(duration: dur)) {
+                    displayedSecondDegrees = angle
+                }
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-                if displayedSecondDegrees >= 360 {
-                    var t = Transaction()
-                    t.disablesAnimations = true
-                    withTransaction(t) {
-                        displayedSecondDegrees = displayedSecondDegrees.truncatingRemainder(dividingBy: 360)
-                    }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.90) {
+            if displayedSecondDegrees >= 360 {
+                var t = Transaction()
+                t.disablesAnimations = true
+                withTransaction(t) {
+                    displayedSecondDegrees = displayedSecondDegrees.truncatingRemainder(dividingBy: 360)
                 }
             }
         }
