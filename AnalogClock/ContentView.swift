@@ -38,9 +38,14 @@ struct ContentView: View {
                 }
                 .padding(.horizontal, 8)
 
-                // 底部轻量控制条（不遮挡大表盘）
-                VStack {
+                VStack(spacing: 12) {
+                    if controlsVisible {
+                        topSecondModeBar
+                            .transition(.move(edge: .top).combined(with: .opacity))
+                    }
+
                     Spacer()
+
                     if controlsVisible {
                         bottomBar
                             .transition(.move(edge: .bottom).combined(with: .opacity))
@@ -61,6 +66,43 @@ struct ContentView: View {
                 .presentationDragIndicator(.visible)
         }
         .preferredColorScheme(theme == .night || theme == .sport ? .dark : .light)
+    }
+
+    /// 顶部：秒针模式切换
+    private var topSecondModeBar: some View {
+        HStack(spacing: 8) {
+            ForEach(SecondHandMode.allCases) { mode in
+                Button {
+                    secondModeRaw = mode.rawValue
+                } label: {
+                    Text(mode.title)
+                        .font(.subheadline.weight(secondMode == mode ? .semibold : .regular))
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 8)
+                        .background(
+                            Capsule()
+                                .fill(secondMode == mode
+                                      ? theme.secondHand.opacity(0.28)
+                                      : Color.primary.opacity(0.08))
+                        )
+                        .overlay(
+                            Capsule()
+                                .stroke(secondMode == mode ? theme.secondHand.opacity(0.65) : .clear, lineWidth: 1)
+                        )
+                        .foregroundStyle(theme.majorTick)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
+        .background(
+            .ultraThinMaterial,
+            in: RoundedRectangle(cornerRadius: 20, style: .continuous)
+        )
+        .padding(.horizontal, 16)
+        .padding(.top, 12)
+        .onTapGesture { }
     }
 
     private var bottomBar: some View {
