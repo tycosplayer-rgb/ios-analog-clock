@@ -163,12 +163,12 @@ struct ClockDialView: View {
     }
 
     private var numeralRadius: CGFloat {
-        // 数字在表圈（边框+刻度）内侧，章环更靠里
+        // 紧贴大刻度内侧：刻度内端约 0.82–0.85，数字中心再往里留半个字高空隙
         switch theme {
-        case .classic: return 0.48
-        case .night: return 0.49
-        case .sport: return 0.47
-        case .minimal: return 0.48
+        case .classic: return 0.76
+        case .night: return 0.77
+        case .sport: return 0.74
+        case .minimal: return 0.76
         }
     }
 
