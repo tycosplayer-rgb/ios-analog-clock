@@ -92,15 +92,14 @@ private struct Tick1HandsLayer: View {
             destination += 360
         }
 
-        // 秒摆：故意放慢、加大，方便肉眼看清（约 6–8° 过冲，来回 4–5 次，约 1.2s 内停住）。
-        // 用显式关键帧而不是很快的弹簧，避免“一闪而过”。
+        // 秒摆：摆幅仍清晰可见，节奏加快（约 0.45s 内停住）。
         let peaks: [(delay: Double, offset: Double, duration: Double)] = [
-            (0.00,  6.5, 0.10),
-            (0.10, -4.0, 0.12),
-            (0.22,  2.6, 0.12),
-            (0.34, -1.5, 0.12),
-            (0.46,  0.7, 0.12),
-            (0.58,  0.0, 0.14),
+            (0.00,  5.5, 0.055),
+            (0.055, -3.2, 0.065),
+            (0.12,  1.8, 0.065),
+            (0.185, -0.9, 0.06),
+            (0.245,  0.35, 0.055),
+            (0.30,  0.0, 0.06),
         ]
         for step in peaks {
             let angle = destination + step.offset
@@ -112,7 +111,7 @@ private struct Tick1HandsLayer: View {
                 }
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.90) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
             if displayedSecondDegrees >= 360 {
                 var t = Transaction()
                 t.disablesAnimations = true
