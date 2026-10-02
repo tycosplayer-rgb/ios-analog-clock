@@ -58,7 +58,7 @@ private struct Tick1HandsLayer: View {
     /// ω ≈ 2π·9 Hz，γ 使约 0.35s 内包络衰减到 ~5%（几次可见来回后自然停住）
     @State private var beatStart: Date?
     @State private var beatTargetDegrees: Double = 0
-    @State private var beatAmplitude: Double = 3.5
+    @State private var beatAmplitude: Double = 2.6
     private let beatOmega: Double = 2.0 * Double.pi * 9.0
     private let beatGamma: Double = 9.5
 
@@ -103,7 +103,7 @@ private struct Tick1HandsLayer: View {
 
         beatTargetDegrees = target
         // 初相位取 0：t=0 时 cos=1，从过冲 A0 开始，再按 e^{-γt} cos(ωt) 衰减回目标
-        beatAmplitude = 3.5
+        beatAmplitude = 2.6
         beatStart = date
         displayedSecondDegrees = target + beatAmplitude
     }
