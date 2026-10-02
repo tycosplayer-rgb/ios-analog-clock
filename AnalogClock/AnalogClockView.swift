@@ -92,17 +92,23 @@ private struct Tick1HandsLayer: View {
             destination += 360
         }
 
-        // 秒摆：参考老式大钟 / 擒纵机构——针身急跳后只轻轻颤一下就停住。
-        // 欠阻尼但高衰减：约 0.07s 响应、阻尼比 ~0.72，肉眼可见一抖，约 0.12s 内死静。
-        withAnimation(.spring(response: 0.07, dampingFraction: 0.72)) {
-            displayedSecondDegrees = destination
+        // 秒摆：更大摆幅 + 多次来回（欠阻尼），跳到目标后明显晃几下再停。
+        // 先冲过目标 ~3.2°，再用低阻尼弹簧回落到目标，约晃 3–4 次。
+        let overshoot = destination + 3.2
+        withAnimation(.easeOut(duration: 0.035)) {
+            displayedSecondDegrees = overshoot
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.16) {
-            if displayedSecondDegrees >= 360 {
-                var t = Transaction()
-                t.disablesAnimations = true
-                withTransaction(t) {
-                    displayedSecondDegrees = displayedSecondDegrees.truncatingRemainder(dividingBy: 360)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.036) {
+            withAnimation(.spring(response: 0.22, dampingFraction: 0.38)) {
+                displayedSecondDegrees = destination
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                if displayedSecondDegrees >= 360 {
+                    var t = Transaction()
+                    t.disablesAnimations = true
+                    withTransaction(t) {
+                        displayedSecondDegrees = displayedSecondDegrees.truncatingRemainder(dividingBy: 360)
+                    }
                 }
             }
         }
