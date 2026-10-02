@@ -43,7 +43,7 @@ private struct SmoothHandsLayer: View {
     }
 }
 
-// MARK: - 秒跳1 + 秒摆
+// MARK: - 秒跳1 + 秒摆（欠阻尼振动）
 
 private struct Tick1HandsLayer: View {
     let theme: FaceTheme
@@ -54,6 +54,14 @@ private struct Tick1HandsLayer: View {
     @State private var hourDegrees: Double = 0
     @State private var minuteDegrees: Double = 0
 
+    /// 秒摆物理参数：θ(t) = A0 * e^(-γt) * cos(ω t)
+    /// ω ≈ 2π·9 Hz，γ 使约 0.35s 内包络衰减到 ~5%（几次可见来回后自然停住）
+    @State private var beatStart: Date?
+    @State private var beatTargetDegrees: Double = 0
+    @State private var beatAmplitude: Double = 3.5
+    private let beatOmega: Double = 2.0 * Double.pi * 9.0
+    private let beatGamma: Double = 9.5
+
     var body: some View {
         ClockHandsView(
             theme: theme,
@@ -62,64 +70,59 @@ private struct Tick1HandsLayer: View {
             minuteDegrees: minuteDegrees,
             secondDegrees: displayedSecondDegrees
         )
-        .onAppear { sync(from: Date(), animateWiggle: false) }
-        // 高频轮询以捕捉整秒边界；时/分针也同步更新
-        .onReceive(Timer.publish(every: 1.0 / 30.0, on: .main, in: .common).autoconnect()) { date in
+        .onAppear { sync(from: Date(), startBeat: false) }
+        .onReceive(Timer.publish(every: 1.0 / 60.0, on: .main, in: .common).autoconnect()) { date in
             let second = Calendar.current.component(.second, from: date)
             hourDegrees = ClockMath.hourAngleDegrees(date: date)
             minuteDegrees = ClockMath.minuteAngleDegrees(date: date, continuous: true)
             if second != lastWholeSecond {
-                sync(from: date, animateWiggle: lastWholeSecond >= 0)
+                sync(from: date, startBeat: lastWholeSecond >= 0)
             }
+            applyBeat(at: date)
         }
     }
 
-    private func sync(from date: Date, animateWiggle: Bool) {
+    private func sync(from date: Date, startBeat: Bool) {
         let second = Calendar.current.component(.second, from: date)
-        let target = ClockMath.tick1SecondAngleDegrees(date: date)
+        var target = ClockMath.tick1SecondAngleDegrees(date: date)
         lastWholeSecond = second
         hourDegrees = ClockMath.hourAngleDegrees(date: date)
         minuteDegrees = ClockMath.minuteAngleDegrees(date: date, continuous: true)
 
-        guard animateWiggle else {
-            displayedSecondDegrees = target
+        // 59→0：继续向正方向转到 360，再归一化
+        if target + 180 < displayedSecondDegrees {
+            target += 360
+        }
+
+        guard startBeat else {
+            displayedSecondDegrees = target.truncatingRemainder(dividingBy: 360)
+            beatStart = nil
+            beatTargetDegrees = displayedSecondDegrees
             return
         }
 
-        var destination = target
-        // 59→0：继续向正方向转到 360，再归一化
-        if destination + 180 < displayedSecondDegrees {
-            destination += 360
-        }
+        beatTargetDegrees = target
+        // 初相位取 0：t=0 时 cos=1，从过冲 A0 开始，再按 e^{-γt} cos(ωt) 衰减回目标
+        beatAmplitude = 3.5
+        beatStart = date
+        displayedSecondDegrees = target + beatAmplitude
+    }
 
-        // 秒摆：半幅 + 更快（约 0.28s 内停住）。
-        let peaks: [(delay: Double, offset: Double, duration: Double)] = [
-            (0.00,  3.5, 0.035),
-            (0.035, -2.0, 0.04),
-            (0.075,  1.15, 0.04),
-            (0.115, -0.55, 0.035),
-            (0.15,  0.22, 0.035),
-            (0.185,  0.0, 0.04),
-        ]
-        for step in peaks {
-            let angle = destination + step.offset
-            let delay = step.delay
-            let dur = step.duration
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                withAnimation(.easeInOut(duration: dur)) {
-                    displayedSecondDegrees = angle
-                }
-            }
+    private func applyBeat(at date: Date) {
+        guard let start = beatStart else { return }
+        let t = date.timeIntervalSince(start)
+        if t < 0 { return }
+        if t > 0.45 {
+            var settled = beatTargetDegrees.truncatingRemainder(dividingBy: 360)
+            if settled < 0 { settled += 360 }
+            displayedSecondDegrees = settled
+            beatStart = nil
+            return
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.28) {
-            if displayedSecondDegrees >= 360 {
-                var t = Transaction()
-                t.disablesAnimations = true
-                withTransaction(t) {
-                    displayedSecondDegrees = displayedSecondDegrees.truncatingRemainder(dividingBy: 360)
-                }
-            }
-        }
+        // 欠阻尼：指数包络 × 余弦振荡
+        let envelope = exp(-beatGamma * t)
+        let offset = beatAmplitude * envelope * cos(beatOmega * t)
+        displayedSecondDegrees = beatTargetDegrees + offset
     }
 }
 
