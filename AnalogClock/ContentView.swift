@@ -20,10 +20,10 @@ struct ContentView: View {
     var body: some View {
         GeometryReader { geo in
             let bannerWidth = max(geo.size.width, 320)
-            // Reserved banner height when ads are showing; 0 after remove-ads.
-            let bannerHeight = adsRemoved ? 0 : BannerAdView.preferredHeight(forWidth: bannerWidth)
-            // Controls sit clear of banners: inset by banner height when visible,
-            // otherwise restore the original 12pt edge padding.
+            // Reserve the standard 50pt banner height when ads are showing;
+            // reclaim it completely after remove-ads.
+            let bannerHeight = adsRemoved ? 0 : BannerAdView.preferredHeight()
+            // Keep controls 8pt clear of the compact banner.
             let controlTopInset: CGFloat = adsRemoved ? 12 : bannerHeight + 8
             let controlBottomInset: CGFloat = adsRemoved ? 12 : bannerHeight + 8
             let reservedChrome: CGFloat = (adsRemoved ? 0 : bannerHeight * 2) + 24
@@ -74,7 +74,7 @@ struct ContentView: View {
                 // Top + bottom AdMob test banners pinned to edges (pass-through center).
                 VStack(spacing: 0) {
                     if !adsRemoved {
-                        BannerAdView(width: bannerWidth)
+                        BannerAdView()
                             .frame(width: bannerWidth, height: bannerHeight)
                             .frame(maxWidth: .infinity)
                             .background(Color.black.opacity(0.06))
@@ -84,7 +84,7 @@ struct ContentView: View {
                         .allowsHitTesting(false)
 
                     if !adsRemoved {
-                        BannerAdView(width: bannerWidth)
+                        BannerAdView()
                             .frame(width: bannerWidth, height: bannerHeight)
                             .frame(maxWidth: .infinity)
                             .background(Color.black.opacity(0.06))
@@ -186,7 +186,7 @@ struct ContentView: View {
                     .background(Circle().fill(Color.primary.opacity(0.08)))
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("设置")
+            .accessibilityLabel(String(localized: "设置"))
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 10)

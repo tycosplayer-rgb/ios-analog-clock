@@ -5,15 +5,16 @@ import UIKit
 /// SwiftUI wrapper around Google Mobile Ads `BannerView` (UIKit).
 struct BannerAdView: UIViewRepresentable {
     var adUnitID: String = AdMobConfig.bannerAdUnitID
-    var width: CGFloat
+
+    /// Standard AdMob banner: 320x50pt, avoiding the taller large-banner size.
+    static let bannerHeight: CGFloat = AdSizeBanner.size.height
 
     func makeCoordinator() -> Coordinator {
         Coordinator()
     }
 
     func makeUIView(context: Context) -> BannerView {
-        let size = currentOrientationAnchoredAdaptiveBanner(width: width)
-        let banner = BannerView(adSize: size)
+        let banner = BannerView(adSize: AdSizeBanner)
         banner.adUnitID = adUnitID
         banner.rootViewController = Self.keyRootViewController()
         banner.delegate = context.coordinator
@@ -22,9 +23,8 @@ struct BannerAdView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: BannerView, context: Context) {
-        let size = currentOrientationAnchoredAdaptiveBanner(width: width)
-        if uiView.adSize.size.width != size.size.width {
-            uiView.adSize = size
+        if uiView.adSize.size != AdSizeBanner.size {
+            uiView.adSize = AdSizeBanner
             uiView.load(Request())
         }
         if uiView.rootViewController == nil {
@@ -32,9 +32,9 @@ struct BannerAdView: UIViewRepresentable {
         }
     }
 
-    /// Preferred height for layout reservation (adaptive min is 50pt).
-    static func preferredHeight(forWidth width: CGFloat) -> CGFloat {
-        currentOrientationAnchoredAdaptiveBanner(width: width).size.height
+    /// Preferred height for layout reservation.
+    static func preferredHeight() -> CGFloat {
+        bannerHeight
     }
 
     private static func keyRootViewController() -> UIViewController? {
