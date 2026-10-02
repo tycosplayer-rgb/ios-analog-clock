@@ -94,19 +94,19 @@ struct ClockDialView: View {
 
     private var majorTickInner: CGFloat {
         switch theme.tickStyle {
-        case .classic: return 0.78
-        case .luminous: return 0.80
-        case .thin: return 0.86
-        case .bold: return 0.74
+        case .classic: return 0.84
+        case .luminous: return 0.85
+        case .thin: return 0.88
+        case .bold: return 0.82
         }
     }
 
     private var minorTickInner: CGFloat {
         switch theme.tickStyle {
-        case .classic: return 0.86
-        case .luminous: return 0.87
-        case .thin: return 0.90
-        case .bold: return 0.84
+        case .classic: return 0.89
+        case .luminous: return 0.90
+        case .thin: return 0.92
+        case .bold: return 0.88
         }
     }
 
@@ -163,11 +163,12 @@ struct ClockDialView: View {
     }
 
     private var numeralRadius: CGFloat {
+        // 数字落在表盘内侧（刻度环以内），接近老式大钟的章环位置
         switch theme {
-        case .classic: return 0.68
-        case .night: return 0.70
-        case .sport: return 0.66
-        case .minimal: return 0.70
+        case .classic: return 0.56
+        case .night: return 0.57
+        case .sport: return 0.55
+        case .minimal: return 0.56
         }
     }
 

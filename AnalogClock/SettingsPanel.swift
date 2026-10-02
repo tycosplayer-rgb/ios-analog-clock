@@ -85,7 +85,7 @@ struct SettingsPanel: View {
                 } header: {
                     Text("秒针模式")
                 } footer: {
-                    Text("「秒跳1」在每秒跳动后带有短暂秒摆（过冲回弹）；「秒跳2」每秒跳跃 4 次（每分钟 240 步）。")
+                    Text("「秒跳1」每秒一跳，跳完后像老钟一样短暂颤一下就停；「秒跳2」每秒跳 4 格。")
                 }
             }
             .navigationTitle("设置")

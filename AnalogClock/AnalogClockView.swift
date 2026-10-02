@@ -92,22 +92,17 @@ private struct Tick1HandsLayer: View {
             destination += 360
         }
 
-        // 秒摆：过冲约 1.8°，再弹簧回落
-        let overshoot = destination + 1.8
-        withAnimation(.easeOut(duration: 0.045)) {
-            displayedSecondDegrees = overshoot
+        // 秒摆：参考老式大钟 / 擒纵机构——针身急跳后只轻轻颤一下就停住。
+        // 欠阻尼但高衰减：约 0.07s 响应、阻尼比 ~0.72，肉眼可见一抖，约 0.12s 内死静。
+        withAnimation(.spring(response: 0.07, dampingFraction: 0.72)) {
+            displayedSecondDegrees = destination
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-            withAnimation(.interpolatingSpring(stiffness: 420, damping: 12)) {
-                displayedSecondDegrees = destination
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                if displayedSecondDegrees >= 360 {
-                    var t = Transaction()
-                    t.disablesAnimations = true
-                    withTransaction(t) {
-                        displayedSecondDegrees = displayedSecondDegrees.truncatingRemainder(dividingBy: 360)
-                    }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.16) {
+            if displayedSecondDegrees >= 360 {
+                var t = Transaction()
+                t.disablesAnimations = true
+                withTransaction(t) {
+                    displayedSecondDegrees = displayedSecondDegrees.truncatingRemainder(dividingBy: 360)
                 }
             }
         }
